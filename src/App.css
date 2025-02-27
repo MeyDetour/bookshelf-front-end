@@ -1,0 +1,108 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background: #E4D8CA;
+    padding: 0;
+    margin: 0;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 18px;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: grid;
+}
+
+.defaultButton {
+    background: linear-gradient(180deg, #E98354 0%, #AE434E 100%);
+
+    border: 0;
+    outline: 0;
+    border-radius: 20px;
+    padding: 13px 38px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 17px;
+}
+h2{
+
+    width: fit-content;
+    color: #7e6d68;
+    font-size: 22px;
+}
+a {
+    font-size: 16px
+}
+
+[class*="Page"]{
+    width: 100vw;
+    height: 100vh;
+}
+
+
+
+.plainForm{
+    justify-self: center;
+    width: 50%;
+    height: 100vh;
+    background: #FCF8F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+    background: url(src/assets/bookBackground.png);
+    background-size: 201px;
+}
+
+.plainForm label{
+    width: 54%;
+}
+.plainForm input{
+
+    background-color: #f8ede5;
+    border-radius: 25px;
+    padding: 15px;
+    border: 0;
+    outline: 0;
+    box-shadow: inset 0 0 14px 1px #dbdbdb69;
+    width: 100%;
+
+}
+
+
+.simpleForm{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 27px;
+   background-size: 201px;
+}
+
+.simpleForm label{
+    width: 54%;
+}
+.simpleForm input{
+
+    background-color: #FBF9F5;
+    border-radius: 25px;
+    padding: 15px;
+    border: 0;
+    outline: 0;
+    box-shadow: inset 0 0 14px 1px #dbdbdb69;
+    width: 100%;
+
+}
+
+a{
+    color: black;
+
+}

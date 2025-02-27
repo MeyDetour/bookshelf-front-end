@@ -1,0 +1,18 @@
+
+.bookmark{
+    width: 10%;
+    height: 38%;
+    background: #9184B8;
+    position: absolute;
+    left: 10%;
+    top: 0;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0% 100%);
+
+}
+
+
+a{
+    color: black;
+
+}

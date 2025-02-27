@@ -1,0 +1,67 @@
+.basePage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background: #FCF8F5;
+}
+
+.basePage .content {
+    height: 100%;
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+}
+
+.basePage .content .header {
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 8%;
+    padding-block: 15px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+.basePage .content .header input {
+    height: 100%;
+    width: 50%;
+    background: #F6EFE6;
+    position: relative;
+}
+
+.basePage .content .header input::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: url(src/assets/icons/search.svg) no-repeat center;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.basePage .content .header .defaultButton {
+
+}
+
+
+.basePage .content .left {
+    width: 100%;
+
+    padding: 17px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.basePage .content .right {
+    height: 100%;
+    padding: 17px;
+    box-sizing: border-box;
+}
+
+.basePage .content .right:has(*) {
+    width: 40%;
+    background: #F0E6DC;
+}
