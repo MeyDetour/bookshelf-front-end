@@ -6,6 +6,7 @@ import "./style.css"
 import Dashboard from "./subpages/dashboard/dashboard.jsx";
 import Plus from "./subpages/plus/Plus.jsx";
 import Bookshelf from "./subpages/bookshelf/Bookshelf.jsx";
+import BooksOfBookshelves from "./subpages/BooksOfBookshelves/BooksOfBookshelves.jsx";
 
 export default function BasePage() {
     const {subpage, '*': wildcard} = useParams();
@@ -21,7 +22,12 @@ export default function BasePage() {
                             <input type="search"/>
                             <button className={"defaultButton"}>Search</button>
                         </div>
-                        <Dashboard subpage={subpage}></Dashboard>
+                        {subpage === "book" ?
+                            <BooksOfBookshelves bookId={wildcard}></BooksOfBookshelves>
+                            : <Dashboard subpage={subpage}></Dashboard>
+                        }
+
+
                     </div>
                     {subpage !== "dashboard" && <div className="right">
                         {subpage === 'plus' && <Plus/>}

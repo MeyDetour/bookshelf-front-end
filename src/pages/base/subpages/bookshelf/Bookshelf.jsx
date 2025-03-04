@@ -1,7 +1,10 @@
 import useApi from "../../../../hooks/useApi.jsx";
 import {useToast} from "../../../../hooks/useToast.jsx";
 import {useEffect, useState} from "react";
-import PropTypes from 'prop-types';  // Importer PropTypes
+import "./style.css"
+import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
+import OneBook from "../../../../components/oneBook/oneBook.jsx";  // Importer PropTypes
 export default function Bookshelf({id}) {
     const api = useApi();
     const toast = useToast();
@@ -23,20 +26,16 @@ export default function Bookshelf({id}) {
             .catch((err) => {
                 toast(" ", "Error while login :" + err.message);
             });
-    }, [])
+    }, [id])
 
 
     return (
         <>{bookshelf.name &&
-            <div>
+            <div className={"oneBookshelf"}>
                 <h1>{bookshelf.name}</h1>
                 <div className="booksContainer">
-                    {bookshelf.books && bookshelf.books.map((book) => (
-                        <div key={book._id} className={"oneBook"}>
-                            {book.image ? <img src={import.meta.VITE_BASE_URL + book.image} alt=""/> :
-                                <img src="/src/assets/images/bookCover.png" alt=""/>}  
-                            <span>{book.title}</span>
-                        </div>
+                    {bookshelf.books && bookshelf.books.map((book,index) => (
+                        <OneBook key={index} book={book}></OneBook>
                     ))}
                 </div>
             </div>

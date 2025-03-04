@@ -25,7 +25,7 @@ export default function useApi() {
 
             const data = await response.json();
             console.log(response.status,data);
-            return data; // Retourne les données
+            return data;
         } catch (error) {
             console.log(error)
              if (error.status === 401) {
