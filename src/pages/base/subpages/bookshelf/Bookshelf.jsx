@@ -8,7 +8,7 @@ export default function Bookshelf({id}) {
     console.log("bookshelf page of ", id);
     const api = useApi();
     const toast = useToast();
-    const [bookshelf, setBookshelf] = useState({});
+    const [bookshelf, setBookshelf] = useState(null);
 
     useEffect(() => {
         api("api/bookshelf/get/" + id, null, null, 'GET')
@@ -21,9 +21,13 @@ export default function Bookshelf({id}) {
             });
     }, [id])
 
+    if (!bookshelf) {
+        return <span>No bookokshelf</span>
+    }
+    console.log(bookshelf);
 
     return (
-        <>{bookshelf.name &&
+        <>{ bookshelf.books.length > 0 ?
             <div className={"oneBookshelf"}>
                 <h1>{bookshelf.name}</h1>
                 <div className="booksContainer">
@@ -32,7 +36,7 @@ export default function Bookshelf({id}) {
                     ))}
                 </div>
             </div>
-        }
+        : <span>No book here</span>}
         </>
     )
 }

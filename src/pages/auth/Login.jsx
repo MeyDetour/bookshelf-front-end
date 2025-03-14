@@ -20,7 +20,7 @@ export default function Login() {
             .then((res) => {
                 toast("OK", "Login Successfully");
                 sessionStorage.setItem("token", res.token);
-                navigate("/private/dashboard");
+                navigate("/private/bookshelves");
             })
             .catch((err) => {
                 toast(" ", "Error while login :" + err.message);

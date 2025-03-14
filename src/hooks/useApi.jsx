@@ -23,6 +23,7 @@ const toast = useToast();
             if (response.status === 401) {
                 sessionStorage.removeItem("token");
                 navigate("/");
+                return
             }
             if (!response.ok) {
                 return null
@@ -37,9 +38,9 @@ const toast = useToast();
                 sessionStorage.removeItem("token");
                 navigate("/");
                 throw new Error("Your session has expired. Please log in again.");
+                return
             }
             try {
-
                 const responseBody = await error.json();
                 toast.error(responseBody?.message || "An unexpected error occurred.");
                 throw new Error(responseBody?.message || "An unexpected error occurred.");
@@ -47,6 +48,7 @@ const toast = useToast();
                 toast.error("An unexpected error occurred, and the response could not be parsed.")
                 throw new Error("An unexpected error occurred, and the response could not be parsed.");
             }
+            return null
         }
     };
 

@@ -3,7 +3,7 @@ import {useToast} from "../../../../hooks/useToast.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import './style.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function New() {
     const api = useApi();
@@ -13,10 +13,27 @@ export default function New() {
     const [type, setType] = useState("bookshelf")
     const [bookImage, setBookImage] = useState(null)
     const [bookPdf, setBookPdf] = useState(null)
+    const [bookshelves, setBookshelves] = useState([]);
+    const [selectedBookshelves, setSelectedBookshelves] = useState([]);
     const {
         register,
         handleSubmit,
     } = useForm();
+
+    console.log("bookshelves page");
+    useEffect(() => {
+
+        api("api/bookshelves", null, null, 'GET')
+            .then((res) => {
+                console.log(res)
+                setBookshelves(res);
+            })
+            .catch((err) => {
+                toast(" ", "Error while login :" + err.message);
+            });
+    }, [])
+
+
 
     const onSubmiData = (data) => {
         console.log("submitted")
@@ -41,7 +58,7 @@ export default function New() {
         api("api/bookshelf/new", null, data, "POST")
             .then((res) => {
                 console.log(res)
-                navigate("/private/dashboard");
+                navigate("/private/bookshelves");
             })
             .catch((err) => {
                 setError(err)
@@ -55,23 +72,38 @@ export default function New() {
         console.log(data)
         if (!data) {
             setError("No data send")
+            return
         }
         if (!data.title || data.title ==="") {
             setError("Please enter a title")
+            return
         }
+
         if (!data.publishedYear || data.publishedYear ==="") {
-            setError("Please enter a title")
+            setError("Please enter a published year")
+            return
+        }
+        if (data.publishedYear > new Date().getFullYear()) {
+            setError("Please enter a year")
+            return
         }
         api("api/book/new", null, data, "POST")
             .then((res) => {
                 console.log(res)
-                navigate("/private/book/" + res.id);
+
+                if (res && res.id){
+                    navigate("/private/book/" + res.id);
+                }else{
+                    setError("no result")
+                }
+
             })
             .catch((err) => {
                 setError(err)
-                toast(" ", "Error while create bookshelf :" + err.message);
+                toast(" ", "Error while create book :" + err.message);
             });
     };
+
 
     return (
         <>
@@ -79,6 +111,7 @@ export default function New() {
                 <span onClick={() => setType("bookshelf")}
                       className={type === "bookshelf" ? "focus" : ""}>Bookshelf</span>
                 <span onClick={() => setType("book")} className={type === "book" ? "focus" : ""}>Book</span>
+               <Link to={"/private/bookshelves"}>X</Link>
             </div>
             <hr/>
             {type === "bookshelf" ?
@@ -100,11 +133,16 @@ export default function New() {
                     <button type="submit" className={"defaultButton"} value="Submit">Create</button>
 
                 </form>
-                : <form onSubmit={handleSubmit(onSubmiData)} className={"simpleForm"}>
+                :
+
+
+                <form onSubmit={handleSubmit(onSubmiData)} className={"simpleForm"}>
                     <h2>New book</h2>
                     {error && (
                         <span className={"error md-text"}>{error}</span>
                     )}
+
+
 
                     <label>
                         <input
@@ -121,7 +159,7 @@ export default function New() {
                 </label>
                     <label>
                         <input
-                            type="date"
+                            type="number"
                             placeholder="Book published Year"
                             {...register("publishedYear", {})}
                         />
@@ -135,6 +173,25 @@ export default function New() {
                     <label>
                         <input type="file" accept=".pdf" onChange={(e) => setBookPdf(e.target.files[0])} />
                     </label>
+                    { bookshelves && (
+                      <><legend>Choose your corresponding's bookshelves:</legend>
+                          {bookshelves.map((bookshelf) => (
+                              <div key={bookshelf._id} className="form-check">
+                                  <input
+                                      value={bookshelf._id}
+                                      type="checkbox"
+                                      id={bookshelf._id}
+                                      {...register("bookshelves", { required: false })}
+
+                                  />
+                                  <label htmlFor={bookshelf._id}>{bookshelf.name}</label>
+                              </div>
+                          ))}
+                      </>
+
+
+                    )}
+
 
                     {/* Bouton de soumission */}
                     <button type="submit" className={"defaultButton"} value="Submit">Create</button>

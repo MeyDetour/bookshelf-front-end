@@ -4,11 +4,11 @@ import {useToast} from "../../../../hooks/useToast.jsx";
 import './style.css'
 import {Link} from "react-router-dom";
 
-export default function Dashboard(subpage) {
+export default function Bookshelves(subpage) {
     const api = useApi();
     const toast = useToast();
     const [bookshelves, setBookshelves] = useState([]);
-
+    console.log("bookshelves page");
     useEffect(() => {
 
         api("api/bookshelves", null, null, 'GET')

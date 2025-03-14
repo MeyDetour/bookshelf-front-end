@@ -2,12 +2,15 @@
     display: flex;
     flex-direction: row;
     align-items: end;
+    overflow-x: auto;
     width: 100%;
     gap: 50px;
+
+    margin-block: 28px;
 }
 
 .bookshelvesContainer > .oneBookshelf{
-    width: 12%;
+    width: 22%;
     height: fit-content;
 }
 

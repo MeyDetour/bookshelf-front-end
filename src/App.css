@@ -14,20 +14,56 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    display: grid;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+}
+::-webkit-scrollbar {
+    width: 2px;
+    display: none;
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #8e8e8e;
+}
 .error{
     color: red;
 }
 
+hr{
+    width: 100%;
+}
 .defaultButton {
     background: linear-gradient(180deg, #E98354 0%, #AE434E 100%);
 
     border: 0;
     outline: 0;
-    border-radius: 20px;
-    padding: 13px 38px;
+    border-radius: 6px;
+    padding: 8px 28px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 17px;
+}
+.button1 {
+    background: linear-gradient(180deg, #e09ae8 0%, #b418bf 100%);
+
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    padding: 8px 28px;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -44,7 +80,7 @@ a {
 }
 
 [class*="Page"]{
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
 }
 
@@ -96,7 +132,7 @@ a {
 .simpleForm input,
 .simpleForm textarea{
 box-sizing: border-box;
-    background-color: #FBF9F5;
+    background-color: #dbdbdb;
     border-radius: 25px;
     padding: 15px;
     border: 0;
@@ -105,7 +141,12 @@ box-sizing: border-box;
     width: 100%;
 
 }
-
+.simpleForm .form-check{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
 a{
     color: black;
 
