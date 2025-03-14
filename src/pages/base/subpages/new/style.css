@@ -1,0 +1,17 @@
+.headerOfForm{
+    margin: -17px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.headerOfForm span{
+
+    cursor: pointer;
+}
+
+.headerOfForm .focus{
+font-weight: bold;
+}

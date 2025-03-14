@@ -17,6 +17,10 @@ body {
     display: grid;
 }
 
+.error{
+    color: red;
+}
+
 .defaultButton {
     background: linear-gradient(180deg, #E98354 0%, #AE434E 100%);
 
@@ -78,7 +82,6 @@ a {
 
 .simpleForm{
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -87,11 +90,12 @@ a {
    background-size: 201px;
 }
 
-.simpleForm label{
-    width: 54%;
+.simpleForm label,  .simpleForm textarea{
+    width: 100%;
 }
-.simpleForm input{
-
+.simpleForm input,
+.simpleForm textarea{
+box-sizing: border-box;
     background-color: #FBF9F5;
     border-radius: 25px;
     padding: 15px;

@@ -4,7 +4,7 @@ import Profile from "./subpages/profile/Profile.jsx";
 import Book from "./subpages/book/Book.jsx";
 import "./style.css"
 import Dashboard from "./subpages/dashboard/dashboard.jsx";
-import Plus from "./subpages/plus/Plus.jsx";
+import New from "./subpages/new/new.jsx";
 import Bookshelf from "./subpages/bookshelf/Bookshelf.jsx";
 import BooksOfBookshelves from "./subpages/BooksOfBookshelves/BooksOfBookshelves.jsx";
 
@@ -24,13 +24,14 @@ export default function BasePage() {
                         </div>
                         {subpage === "book" ?
                             <BooksOfBookshelves bookId={wildcard}></BooksOfBookshelves>
-                            : <Dashboard subpage={subpage}></Dashboard>
+                            :
+                                 <Dashboard subpage={subpage}></Dashboard>
                         }
 
 
                     </div>
                     {subpage !== "dashboard" && <div className="right">
-                        {subpage === 'plus' && <Plus/>}
+                        {subpage === 'plus' && <New/>}
                         {subpage === 'profile' && <Profile/>}
                         {subpage === 'bookshelf' && wildcard && <Bookshelf id={wildcard}> </Bookshelf>}
                         {subpage === 'book' && wildcard && <Book id={wildcard}> </Book>}

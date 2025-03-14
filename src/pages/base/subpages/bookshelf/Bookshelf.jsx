@@ -3,9 +3,9 @@ import {useToast} from "../../../../hooks/useToast.jsx";
 import {useEffect, useState} from "react";
 import "./style.css"
 import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
 import OneBook from "../../../../components/oneBook/oneBook.jsx";  // Importer PropTypes
 export default function Bookshelf({id}) {
+    console.log("bookshelf page of ", id);
     const api = useApi();
     const toast = useToast();
     const [bookshelf, setBookshelf] = useState({});
@@ -13,14 +13,7 @@ export default function Bookshelf({id}) {
     useEffect(() => {
         api("api/bookshelf/get/" + id, null, null, 'GET')
             .then((res) => {
-                res.books = [
-                    {
-                        _id: 0,
-                        title: "Bookshelf",
-                    }
-                ]
 
-                console.log(res)
                 setBookshelf(res);
             })
             .catch((err) => {
