@@ -7,7 +7,7 @@ export default function OneBook({book}) {
     return (
         <Link to={'/private/book/' + book._id} className={"oneBook"}>
             {book.image ? <img src={import.meta.VITE_BASE_URL + book.image} alt=""/> :
-                <img src="/src/assets/images/bookCover.png" alt=""/>
+                <img src="/images/bookCover.png" alt=""/>
             }
             <div>
                 <span>{book.title}</span>

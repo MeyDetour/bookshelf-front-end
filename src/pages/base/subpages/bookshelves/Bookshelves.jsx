@@ -28,12 +28,12 @@ export default function Bookshelves(subpage) {
             <div className={"bookshelvesContainer"}>
                 {bookshelves && bookshelves.map((bookshelf, index) => (
                     <Link key={bookshelf._id} className={"oneBookshelf"} to={"/private/bookshelf/"+bookshelf._id}>
-                        <img src={`/src/assets/images/bookshelves/b${index % 9}.png`} alt=""/>
+                        <img src={`/images/bookshelves/b${index % 9}.png`} alt=""/>
 
                         <div>
                             <span>{bookshelf.name}</span>
                             <div className={"bookCount"}>
-                                <img style={{width: '20px'}} src="/src/assets/icon/book.svg" alt=""/>
+                                <img style={{width: '20px'}} src="/icon/book.svg" alt=""/>
                                 <span>{bookshelf.books.length}</span>
 
                             </div>
