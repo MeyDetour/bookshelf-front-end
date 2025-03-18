@@ -18,9 +18,12 @@ export default function Login() {
     const onSubmit = (data) => {
         api("login", null, data, "post", false)
             .then((res) => {
-                toast("OK", "Login Successfully");
-                sessionStorage.setItem("token", res.token);
-                navigate("/private/bookshelves");
+                if (res.token){
+
+                    toast("OK", "Login Successfully");
+                    sessionStorage.setItem("token", res.token);
+                    navigate("/private/bookshelves");
+                }
             })
             .catch((err) => {
                 toast(" ", "Error while login :" + err.message);
