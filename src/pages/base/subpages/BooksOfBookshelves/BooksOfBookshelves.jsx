@@ -5,7 +5,7 @@ import './style.css'
 import OneBook from "../../../../components/oneBook/oneBook.jsx";
 
 // eslint-disable-next-line react/prop-types
-export default function BooksOfBookshelves({bookId}) {
+export default function BooksOfBookshelves({bookId,changePageData}) {
     const api = useApi();
     const toast = useToast();
     const [bookshelves, setBookshelves] = useState([]);
@@ -43,7 +43,7 @@ export default function BooksOfBookshelves({bookId}) {
                 <>
                     <h2>Books Of bookshelf : {bookshelf.name}</h2>
                         {bookshelf.books && bookshelf.books.map((book, index) => (
-                            <OneBook key={index} book={book}></OneBook>
+                            <OneBook changePageData={changePageData} key={index} book={book}></OneBook>
                         ))}
                 </>
 

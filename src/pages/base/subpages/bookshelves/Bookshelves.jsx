@@ -1,25 +1,28 @@
+import './style.css'
+import {Link} from "react-router-dom";
+import '../../../../history.js'
 import {useEffect, useState} from "react";
 import useApi from "../../../../hooks/useApi.jsx";
 import {useToast} from "../../../../hooks/useToast.jsx";
-import './style.css'
-import {Link} from "react-router-dom";
-
-export default function Bookshelves(subpage) {
+export default function Bookshelves({changePageData}) {
+    const [bookshelves, setBookshelves] = useState([]);
     const api = useApi();
     const toast = useToast();
-    const [bookshelves, setBookshelves] = useState([]);
-    console.log("bookshelves page");
-    useEffect(() => {
 
-        api("api/bookshelves", null, null, 'GET')
-            .then((res) => {
-                console.log(res)
-                setBookshelves(res);
-            })
-            .catch((err) => {
-                toast(" ", "Error while login :" + err.message);
-            });
-    }, [subpage])
+
+    useEffect(() => {
+        const loadBookshelves = async () => {
+            api("api/bookshelves", null, null, 'GET')
+                .then((res) => {
+                    setBookshelves(res);
+                })
+                .catch((err) => {
+                    toast(" ", "Error while login :" + err.message);
+                });
+        }
+        loadBookshelves()
+    }, []);
+
 
 
     return (
@@ -27,7 +30,7 @@ export default function Bookshelves(subpage) {
             <h2>Bookshelves</h2>
             <div className={"bookshelvesContainer"}>
                 {bookshelves && bookshelves.map((bookshelf, index) => (
-                    <Link key={bookshelf._id} className={"oneBookshelf"} to={"/private/bookshelf/"+bookshelf._id}>
+                    <div key={bookshelf._id} className={"oneBookshelf"} onClick={()=>changePageData("bookshelf",bookshelf._id)} to={"/private/bookshelf/"+bookshelf._id}>
                         <img src={`/images/bookshelves/b${index % 9}.png`} alt=""/>
 
                         <div>
@@ -38,7 +41,7 @@ export default function Bookshelves(subpage) {
 
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 ))}
             </div>
 

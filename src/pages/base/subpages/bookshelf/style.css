@@ -2,7 +2,17 @@
     height: 100%;
 
 }
+.bookshelfHeader{
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.bookshelfHeader > div > img{
+    cursor: pointer;
+}
 .booksContainer{
 
     display: flex;

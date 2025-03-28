@@ -1,0 +1,15 @@
+.editFormHeader{
+    margin: -17px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+.editFormHeader img,
+.editFormHeader a{
+    cursor: pointer;
+}

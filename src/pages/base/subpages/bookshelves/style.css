@@ -13,6 +13,7 @@
     width: 22%;
     height: fit-content;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .bookshelvesContainer > .oneBookshelf img{

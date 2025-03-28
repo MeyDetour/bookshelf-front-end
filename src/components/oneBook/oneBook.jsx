@@ -1,11 +1,9 @@
-import {Link} from "react-router-dom";
-import "./style.css"
-import {useParams} from "react-router";
 
-export default function OneBook({book}) {
-    console.log("the book:",book);
+import "./style.css"
+
+export default function OneBook({book,changePageData}) {
     return (
-        <Link to={'/private/book/' + book._id} className={"oneBook"}>
+        <div onClick={()=> changePageData("book",book._id)  } className={"oneBook"}>
             {book.image ? <img src={import.meta.VITE_BASE_URL + book.image} alt=""/> :
                 <img src="/images/bookCover.png" alt=""/>
             }
@@ -15,7 +13,7 @@ export default function OneBook({book}) {
 
             </div>
 
-        </Link>
+        </div>
     )
 
 }

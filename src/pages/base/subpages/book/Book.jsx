@@ -3,8 +3,9 @@ import useApi from "../../../../hooks/useApi.jsx";
 import {useToast} from "../../../../hooks/useToast.jsx";
 import {useNavigate} from "react-router-dom";
 import "./style.css"
+import "../../../../history.js"
 
-export default function Book({id}) {
+export default function Book({id,changePageData}) {
     const api = useApi();
     const toast = useToast();
     const [book, setBook] = useState({});
@@ -22,15 +23,14 @@ export default function Book({id}) {
             });
 
     }, [id]);
+
     return (
         <div className={"bookDetail"}>
             <div className={"bookHeader"}>
                 <h1>{book.title} ({book.publishedYear})</h1>
 
-              <div>
-                  <img src="/icon/pen.svg" alt=""/>
-                  <img src="/icon/bin.svg" alt=""/>
-              </div>
+                  <img onClick={()=>navigate("/private/edit/book/"+id)} src="/icon/pen.svg" alt=""/>
+
             </div>
             <div className={"bookContent"}>
                 {book.image ? <img src={import.meta.VITE_BASE_URL + book.image} alt=""/> :

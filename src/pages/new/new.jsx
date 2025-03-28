@@ -1,11 +1,12 @@
-import useApi from "../../../../hooks/useApi.jsx";
-import {useToast} from "../../../../hooks/useToast.jsx";
+
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import './style.css'
 import {useEffect, useState} from "react";
+import useApi from "../../hooks/useApi.jsx";
+import {useToast} from "../../hooks/useToast.jsx";
 
-export default function New() {
+export default function New({changePageData}) {
     const api = useApi();
     const toast = useToast();
     const navigate = useNavigate();
@@ -56,8 +57,10 @@ export default function New() {
         }
         api("api/bookshelf/new", null, data, "POST")
             .then((res) => {
-                console.log(res)
-                navigate("/private/bookshelves");
+                if(res.message==='ok'){
+                    console.log(res)
+                    navigate("/private/bookshelves");
+                }
             })
             .catch((err) => {
                 setError(err)
@@ -105,7 +108,8 @@ export default function New() {
 
 
     return (
-        <>
+        <div className="basePage">
+
             <div className={"headerOfForm"}>
                 <span onClick={() => {
                     setType("bookshelf")
@@ -208,7 +212,7 @@ export default function New() {
             }
 
 
-        </>
+        </div>
 
 
     )

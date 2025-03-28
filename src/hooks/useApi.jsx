@@ -32,7 +32,7 @@ export default function useApi() {
             }
 
             const data = await response.json();
-            console.log(response.status, data);
+            console.log(data);
             return data;
         } catch (error) {
             console.error("API error:", error);
