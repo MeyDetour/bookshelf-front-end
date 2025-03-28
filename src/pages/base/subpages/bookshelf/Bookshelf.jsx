@@ -28,14 +28,14 @@ export default function Bookshelf({id}) {
 
     return (
         <>{ bookshelf.books.length > 0 ?
-            <div className={"oneBookshelf"}>
-                <h1>{bookshelf.name}</h1>
+            <>    <h1>Bookshelf : {bookshelf.name}</h1>
                 <div className="booksContainer">
                     {bookshelf.books && bookshelf.books.map((book,index) => (
                         <OneBook key={index} book={book}></OneBook>
                     ))}
                 </div>
-            </div>
+            </>
+
         : <span>No book here</span>}
         </>
     )

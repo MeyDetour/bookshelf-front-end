@@ -6,12 +6,13 @@
     width: 100%;
     gap: 50px;
 
-    margin-block: 28px;
+    height: 24vh;
 }
 
 .bookshelvesContainer > .oneBookshelf{
     width: 22%;
     height: fit-content;
+    text-decoration: none;
 }
 
 .bookshelvesContainer > .oneBookshelf img{

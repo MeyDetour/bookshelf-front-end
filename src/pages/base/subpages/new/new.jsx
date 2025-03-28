@@ -20,7 +20,7 @@ export default function New() {
         handleSubmit,
     } = useForm();
 
-    console.log("bookshelves page");
+    console.log("plus page");
     useEffect(() => {
 
         api("api/bookshelves", null, null, 'GET')
@@ -32,7 +32,6 @@ export default function New() {
                 toast(" ", "Error while login :" + err.message);
             });
     }, [])
-
 
 
     const onSubmiData = (data) => {
@@ -51,7 +50,7 @@ export default function New() {
             setError("No data send")
             return
         }
-        if (!data.name ||data.name ==="") {
+        if (!data.name || data.name === "") {
             setError("Please enter title")
             return;
         }
@@ -66,7 +65,7 @@ export default function New() {
             });
     };
 
-    function createBook(data) {
+    async function createBook(data) {
 
         console.log("submit", data);
         console.log(data)
@@ -74,44 +73,50 @@ export default function New() {
             setError("No data send")
             return
         }
-        if (!data.title || data.title ==="") {
+        if (!data.title || data.title === "") {
             setError("Please enter a title")
             return
         }
 
-        if (!data.publishedYear || data.publishedYear ==="") {
+        if (!data.publishedYear || data.publishedYear === "") {
             setError("Please enter a published year")
             return
         }
         if (data.publishedYear > new Date().getFullYear()) {
-            setError("Please enter a year")
+            setError("Please enter a valid published year")
             return
         }
-        api("api/book/new", null, data, "POST")
-            .then((res) => {
-                console.log(res)
+        console.log( Array.isArray(selectedBookshelves))
+     //   data.bookshelves =  Array.isArray(selectedBookshelves) ? selectedBookshelves  : [selectedBookshelves];
 
-                if (res && res.id){
-                    navigate("/private/book/" + res.id);
-                }else{
-                    setError("no result")
-                }
+        console.log(data)
+            const res = await api("api/book/new", null, data, "POST")
 
-            })
-            .catch((err) => {
-                setError(err)
-                toast(" ", "Error while create book :" + err.message);
-            });
+            console.log(res)
+            if (res.error) {
+                setError(res.error)
+            }
+            if (res && res.id) {
+                navigate("/private/book/" + res.id);
+            }
+
+
     };
 
 
     return (
         <>
             <div className={"headerOfForm"}>
-                <span onClick={() => setType("bookshelf")}
+                <span onClick={() => {
+                    setType("bookshelf")
+                    setError("")
+                }}
                       className={type === "bookshelf" ? "focus" : ""}>Bookshelf</span>
-                <span onClick={() => setType("book")} className={type === "book" ? "focus" : ""}>Book</span>
-               <Link to={"/private/bookshelves"}>X</Link>
+                <span onClick={() => {
+                    setType("book")
+                    setError("")
+                }} className={type === "book" ? "focus" : ""}>Book</span>
+                <Link to={"/private/bookshelves"}>X</Link>
             </div>
             <hr/>
             {type === "bookshelf" ?
@@ -143,7 +148,6 @@ export default function New() {
                     )}
 
 
-
                     <label>
                         <input
                             placeholder="Book title"
@@ -151,12 +155,12 @@ export default function New() {
                         />
                     </label>
                     <label>
-                    <input
+                        <input
 
-                        placeholder="Book INE"
-                        {...register("ine", {})}
-                    />
-                </label>
+                            placeholder="Book INE"
+                            {...register("ine", {})}
+                        />
+                    </label>
                     <label>
                         <input
                             type="number"
@@ -165,29 +169,32 @@ export default function New() {
                         />
                     </label>
 
-                    <textarea   placeholder={"Book description"}    {...register("description", {})} />
+                    <textarea placeholder={"Book description"}    {...register("description", {})} />
 
                     <label>
-                        <input type="file" accept="image/*" onChange={(e) => setBookImage(e.target.files[0])} />
+                        Cover image
+                        <input type="file" accept="image/*" onChange={(e) => setBookImage(e.target.files[0])}/>
                     </label>
                     <label>
-                        <input type="file" accept=".pdf" onChange={(e) => setBookPdf(e.target.files[0])} />
+                        Pdf book
+                        <input type="file" accept=".pdf" onChange={(e) => setBookPdf(e.target.files[0])}/>
                     </label>
-                    { bookshelves && (
-                      <><legend>Choose your corresponding's bookshelves:</legend>
-                          {bookshelves.map((bookshelf) => (
-                              <div key={bookshelf._id} className="form-check">
-                                  <input
-                                      value={bookshelf._id}
-                                      type="checkbox"
-                                      id={bookshelf._id}
-                                      {...register("bookshelves", { required: false })}
+                    {bookshelves && (
+                        <>
+                            <legend>Choose your corresponding's bookshelves:</legend>
+                            {bookshelves.map((bookshelf) => (
+                                <div key={bookshelf._id} className="form-check">
+                                    <input
+                                        value={bookshelf._id}
+                                        type="checkbox"
+                                        id={bookshelf._id}
+                                        {...register("bookshelves", {required: false})}
 
-                                  />
-                                  <label htmlFor={bookshelf._id}>{bookshelf.name}</label>
-                              </div>
-                          ))}
-                      </>
+                                    />
+                                    <label htmlFor={bookshelf._id}>{bookshelf.name}</label>
+                                </div>
+                            ))}
+                        </>
 
 
                     )}

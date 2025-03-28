@@ -1,9 +1,10 @@
 import {Navigate, useNavigate} from "react-router-dom";
 import {useToast} from "./useToast.jsx";
+import Login from "../pages/auth/Login.jsx";
 
 export default function useApi() {
     const navigate = useNavigate();
-const toast = useToast();
+    const toast = useToast();
 
     const api = async (link, headers = {}, body = null, method = "GET", needAuthorization = true) => {
         try {
@@ -19,36 +20,32 @@ const toast = useToast();
                 },
                 body: body ? JSON.stringify(body) : null,
             });
-            console.log(response)
             if (response.status === 401) {
                 sessionStorage.removeItem("token");
                 navigate("/");
-                return
+                return null
             }
             if (!response.ok) {
-                return null
+                console.log(response);
+                const errorResponse = await response.json().catch(() => null);
+                throw { message: errorResponse?.message || `HTTP error! Status: ${response.status}`, status: response.status };
             }
 
             const data = await response.json();
             console.log(response.status, data);
             return data;
         } catch (error) {
-            console.log(error)
+            console.error("API error:", error);
+
             if (error.status === 401) {
                 sessionStorage.removeItem("token");
                 navigate("/");
-                throw new Error("Your session has expired. Please log in again.");
-                return
+                toast("error","Your session has expired. Please log in again.");
+                return {error:"Your session has expired. Please log in again."};
+
             }
-            try {
-                const responseBody = await error.json();
-                toast.error(responseBody?.message || "An unexpected error occurred.");
-                throw new Error(responseBody?.message || "An unexpected error occurred.");
-            } catch (parseError) {
-                toast.error("An unexpected error occurred, and the response could not be parsed.")
-                throw new Error("An unexpected error occurred, and the response could not be parsed.");
-            }
-            return null
+            toast("error",error.message  );
+            return {error:error.message};
         }
     };
 

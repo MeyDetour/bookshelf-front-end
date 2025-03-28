@@ -2,7 +2,6 @@ body {
     height: 100vh;
     width: 100vw;
     overflow-x: hidden;
-    overflow-y: hidden;
     background: #E4D8CA;
     padding: 0;
     margin: 0;
@@ -12,8 +11,7 @@ body {
 
 #root {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-direction:row;
     justify-content: center;
@@ -21,7 +19,7 @@ body {
 }
 ::-webkit-scrollbar {
     width: 2px;
-    display: none;
+    display: flex;
 }
 
 /* Track */
@@ -70,7 +68,7 @@ hr{
     font-size: 17px;
 }
 h2{
-
+margin: 0;
     width: fit-content;
     color: #7e6d68;
     font-size: 22px;
@@ -81,7 +79,7 @@ a {
 
 [class*="Page"]{
     width: 50vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 

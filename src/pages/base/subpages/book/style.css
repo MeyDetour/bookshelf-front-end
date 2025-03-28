@@ -1,5 +1,33 @@
-.bookDetail{
+.bookDetail {
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+.bookDetail .bookHeader {
+display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.bookDetail .bookHeader div{
+    gap: 20px;
+    display: flex;
+}
+
+.bookDetail > .bookContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bookDetail > .bookContent > p {
+    width: 50%
+}
+
+.bookDetail > .bookContent > img {
+    width: 45%;
+    object-fit: contain;
 }

@@ -1,10 +1,4 @@
-.bookshelvesContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    width: 100%;
-    gap: 50px;
-}
+
 
 .bookshelvesContainer > .oneBookshelf img{
     width: 100%;

@@ -42,11 +42,9 @@ export default function BooksOfBookshelves({bookId}) {
             {bookshelves.map(bookshelf => (
                 <>
                     <h2>Books Of bookshelf : {bookshelf.name}</h2>
-                    <div className={"bookshelvesContainer"}>
                         {bookshelf.books && bookshelf.books.map((book, index) => (
                             <OneBook key={index} book={book}></OneBook>
                         ))}
-                    </div>
                 </>
 
             ))}

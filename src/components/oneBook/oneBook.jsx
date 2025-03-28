@@ -11,6 +11,8 @@ export default function OneBook({book}) {
             }
             <div>
                 <span>{book.title}</span>
+                <p>{book.description ?book.description  : "No description for this book" }</p>
+
             </div>
 
         </Link>
