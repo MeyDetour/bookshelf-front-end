@@ -6,7 +6,7 @@
     width: 100%;
     gap: 50px;
 
-    height: 24vh;
+    height: fit-content;
 }
 
 .bookshelvesContainer > .oneBookshelf{
