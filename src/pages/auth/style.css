@@ -1,5 +1,5 @@
 
-.bookmark{
+.bookmark {
     width: 10%;
     height: 38%;
     background: #9184B8;
@@ -12,7 +12,15 @@
 }
 
 
-a{
+a {
     color: black;
 
+}
+
+
+@media only screen and (max-width: 500px) {
+    .bookmark {
+        width: 17%;
+        height: 23%;
+    }
 }
